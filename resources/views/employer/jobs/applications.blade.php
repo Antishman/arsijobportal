@@ -7,6 +7,11 @@
         @foreach($job->applications as $application)
             <li>
                 <strong>{{ $application->user->name }}</strong> ({{ $application->user->email }})<br>
+                
+                @if($application->resume)
+                    <a href="{{ asset('storage/' . $application->resume) }}" target="_blank">Download Resume</a><br>
+                @endif
+
                 <em>Cover Letter:</em><br>
                 <p>{{ $application->cover_letter }}</p>
                 <hr>

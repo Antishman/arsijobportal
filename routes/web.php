@@ -43,4 +43,5 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::get('/jobs', [JobController::class, 'index']);
     Route::get('/jobs/{job}', [JobController::class, 'show']);
     Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store']);
+    Route::get('/applications', [ApplicationController::class, 'myApplications']);
 });

@@ -14,8 +14,11 @@
     <p style="color:red">{{ session('error') }}</p>
 @endif
 
-<form method="POST" action="{{ url('/jobs/' . $job->id . '/apply') }}">
+<form method="POST" action="{{ url('/jobs/' . $job->id . '/apply') }}" enctype="multipart/form-data">
     @csrf
     <textarea name="cover_letter" placeholder="Write your cover letter here..." required></textarea><br>
+    <label>Attach Resume (PDF only):</label>
+    <input type="file" name="resume" accept="application/pdf"><br>
     <button type="submit">Submit Application</button>
 </form>
+
