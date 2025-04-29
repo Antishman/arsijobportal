@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -30,8 +31,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'employer'])->group(function () {
     Route::view('/employer/dashboard', 'employer.dashboard');
+    Route::get('/employer/jobs', [JobController::class, 'create']);
+    Route::post('/employer/jobs', [JobController::class, 'store']);
+    Route::delete('/employer/jobs/{job}', [JobController::class, 'destroy']);
 });
 
 Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::view('/jobseeker/dashboard', 'jobseeker.dashboard');
+    Route::get('/jobs', [JobController::class, 'index']);
+    Route::get('/jobs/{job}', [JobController::class, 'show']);
 });
