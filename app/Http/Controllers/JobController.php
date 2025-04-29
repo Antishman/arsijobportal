@@ -56,5 +56,11 @@ class JobController extends Controller
         $job->delete();
         return redirect('/employer/dashboard')->with('success', 'Job deleted.');
     }
+    public function applications($jobId)
+    {
+        $job = Job::with('applications.user')->where('user_id', auth()->id())->findOrFail($jobId);
+
+        return view('employer.jobs.applications', compact('job'));
+    }
 
 }

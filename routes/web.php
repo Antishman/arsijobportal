@@ -35,6 +35,7 @@ Route::middleware(['auth', 'employer'])->group(function () {
     Route::get('/employer/jobs', [JobController::class, 'create']);
     Route::post('/employer/jobs', [JobController::class, 'store']);
     Route::delete('/employer/jobs/{job}', [JobController::class, 'destroy']);
+    Route::get('/employer/jobs/{job}/applications', [JobController::class, 'applications']);
 });
 
 Route::middleware(['auth', 'jobseeker'])->group(function () {

@@ -3,6 +3,8 @@
 @foreach(Auth::user()->jobs as $job)
     <li>
         {{ $job->title }}
+        <a href="{{ url('/employer/jobs/' . $job->id . '/applications') }}">View Applications</a>
+
         <form action="{{ url('/employer/jobs/' . $job->id) }}" method="POST" style="display:inline">
             @csrf
             @method('DELETE')
