@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,4 +41,5 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::view('/jobseeker/dashboard', 'jobseeker.dashboard');
     Route::get('/jobs', [JobController::class, 'index']);
     Route::get('/jobs/{job}', [JobController::class, 'show']);
+    Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store']);
 });
