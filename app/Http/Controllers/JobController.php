@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Job;
+use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,4 +64,22 @@ class JobController extends Controller
         return view('employer.jobs.applications', compact('job'));
     }
 
+    public function updateStatus($applicationId, Request $request)
+    {
+        $request->validate([
+            'status' => 'required|in:accepted,rejected',
+        ]);
+
+        $application = Application::with('job')->findOrFail($applicationId);
+
+        // Ensure the employer owns the job
+        if ($application->job->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        $application->status = $request->status;
+        $application->save();
+
+        return back()->with('success', 'Application status updated.');
+    }
 }

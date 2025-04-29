@@ -19,4 +19,8 @@ public function user()
     return $this->belongsTo(User::class);
 }
 
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+
 }

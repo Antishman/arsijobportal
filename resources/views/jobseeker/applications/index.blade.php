@@ -8,6 +8,7 @@
             <li>
                 <strong>{{ $application->job->title }}</strong> ({{ $application->job->location }})<br>
                 Applied on: {{ $application->created_at->format('Y-m-d') }}<br>
+                <p>Status: <strong>{{ ucfirst($application->status) }}</strong></p>
                 <em>Cover Letter:</em> {{ $application->cover_letter }}<br>
                 <hr>
             </li>
