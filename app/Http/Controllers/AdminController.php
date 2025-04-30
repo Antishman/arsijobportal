@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Job;
+use App\Models\User;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,9 +12,20 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
+        // Existing data
         $users = User::where('role', '!=', 'admin')->get();
         $jobs = Job::latest()->get();
-        return view('admin.dashboard', compact('users', 'jobs'));
+
+        // New analytics
+        $jobseekerCount = User::where('role', 'jobseeker')->count();
+        $employerCount = User::where('role', 'employer')->count();
+        $jobCount = Job::count();
+        $applicationCount = Application::count();
+
+        return view('admin.dashboard', compact(
+            'users', 'jobs',
+            'jobseekerCount', 'employerCount', 'jobCount', 'applicationCount'
+        ));
     }
 
     public function updateJobStatus($id, Request $request)

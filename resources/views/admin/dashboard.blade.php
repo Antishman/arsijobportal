@@ -1,17 +1,30 @@
 <h2>Admin Dashboard</h2>
 
+<h3>📊 Site Analytics</h3>
+<ul>
+    <li>Total Jobseekers: {{ $jobseekerCount }}</li>
+    <li>Total Employers: {{ $employerCount }}</li>
+    <li>Total Jobs: {{ $jobCount }}</li>
+    <li>Total Applications: {{ $applicationCount }}</li>
+</ul>
+
+<hr>
+
 <h3>All Users</h3>
 <ul>
 @foreach($users as $user)
     <li>
         {{ $user->name }} ({{ $user->email }}) - Role: {{ $user->role }}
         <form action="{{ url('/admin/users/' . $user->id) }}" method="POST" style="display:inline">
-            @csrf @method('DELETE')
+            @csrf
+            @method('DELETE')
             <button onclick="return confirm('Delete this user?')" type="submit">Delete</button>
         </form>
     </li>
 @endforeach
 </ul>
+
+<hr>
 
 <h3>All Jobs</h3>
 <ul>
@@ -34,7 +47,8 @@
         @endif
 
         <form action="{{ url('/admin/jobs/' . $job->id) }}" method="POST" style="display:inline">
-            @csrf @method('DELETE')
+            @csrf
+            @method('DELETE')
             <button onclick="return confirm('Delete this job?')" type="submit">Delete</button>
         </form>
         <hr>
