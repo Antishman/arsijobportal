@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 
 /*
@@ -48,4 +49,11 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::get('/applications/{id}/edit', [ApplicationController::class, 'edit']);
     Route::post('/applications/{id}/update', [ApplicationController::class, 'update']);
     Route::delete('/applications/{id}', [ApplicationController::class, 'destroy']);
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::post('/admin/jobs/{id}/status', [AdminController::class, 'updateJobStatus']);
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
+    Route::delete('/admin/jobs/{id}', [AdminController::class, 'deleteJob']);
 });

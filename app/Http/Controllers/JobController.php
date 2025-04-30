@@ -16,32 +16,33 @@ class JobController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'required',
-        'location' => 'required|string',
-        'type' => 'required|string',
-        'salary' => 'nullable|string',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'location' => 'required|string',
+            'type' => 'required|string',
+            'salary' => 'nullable|string',
+        ]);
 
-    $job = new Job();
-    $job->user_id = Auth::id(); // Assign employer ID manually
-    $job->title = $request->title;
-    $job->description = $request->description;
-    $job->location = $request->location;
-    $job->type = $request->type;
-    $job->salary = $request->salary;
-    $job->save();
+        $job = new Job();
+        $job->user_id = Auth::id(); // Assign employer ID manually
+        $job->title = $request->title;
+        $job->description = $request->description;
+        $job->location = $request->location;
+        $job->type = $request->type;
+        $job->salary = $request->salary;
+        $job->save();
 
-    return redirect('/employer/dashboard')->with('success', 'Job posted successfully!');
-}
+        return redirect('/employer/dashboard')->with('success', 'Job posted successfully!');
+    }
 
     public function index()
     {
-        $jobs = Job::latest()->get();
+        $jobs = Job::where('status', 'approved')->latest()->get();
         return view('jobseeker.jobs.index', compact('jobs'));
     }
+
 
     public function show(Job $job)
     {
