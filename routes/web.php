@@ -45,4 +45,7 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::get('/jobs/{job}', [JobController::class, 'show']);
     Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store']);
     Route::get('/applications', [ApplicationController::class, 'myApplications']);
+    Route::get('/applications/{id}/edit', [ApplicationController::class, 'edit']);
+    Route::post('/applications/{id}/update', [ApplicationController::class, 'update']);
+    Route::delete('/applications/{id}', [ApplicationController::class, 'destroy']);
 });

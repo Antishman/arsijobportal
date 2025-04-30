@@ -49,5 +49,52 @@ class ApplicationController extends Controller
 
         return view('jobseeker.applications.index', compact('applications'));
     }
+        public function edit($id)
+    {
+        $application = Application::with('job')->where('user_id', auth()->id())->findOrFail($id);
+
+        if ($application->status !== 'pending') {
+            return redirect('/applications')->with('error', 'You can only edit pending applications.');
+        }
+
+        return view('jobseeker.applications.edit', compact('application'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'cover_letter' => 'required|string',
+            'resume' => 'nullable|file|mimes:pdf|max:2048',
+        ]);
+
+        $application = Application::where('user_id', auth()->id())->findOrFail($id);
+
+        if ($application->status !== 'pending') {
+            return redirect('/applications')->with('error', 'You can only update pending applications.');
+        }
+
+        if ($request->hasFile('resume')) {
+            $resumePath = $request->file('resume')->store('resumes', 'public');
+            $application->resume = $resumePath;
+        }
+
+        $application->cover_letter = $request->cover_letter;
+        $application->save();
+
+        return redirect('/applications')->with('success', 'Application updated.');
+    }
+
+    public function destroy($id)
+    {
+        $application = Application::where('user_id', auth()->id())->findOrFail($id);
+
+        if ($application->status !== 'pending') {
+            return redirect('/applications')->with('error', 'You can only withdraw pending applications.');
+        }
+
+        $application->delete();
+
+        return redirect('/applications')->with('success', 'Application withdrawn.');
+    }
 
 }
