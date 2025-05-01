@@ -37,11 +37,27 @@ class JobController extends Controller
         return redirect('/employer/dashboard')->with('success', 'Job posted successfully!');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $jobs = Job::where('status', 'approved')->latest()->get();
+        $query = Job::where('status', 'approved');
+
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        if ($request->filled('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        $jobs = $query->latest()->get();
+
         return view('jobseeker.jobs.index', compact('jobs'));
     }
+
 
 
     public function show(Job $job)
