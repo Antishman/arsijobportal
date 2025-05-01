@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Job;
+
+use App\Models\User;
+use App\Models\Bookmark;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +55,7 @@ class JobController extends Controller
             $query->where('type', $request->type);
         }
 
-        $jobs = $query->latest()->get();
+        $jobs = $query->latest()->paginate(10); // 10 jobs per page
 
         return view('jobseeker.jobs.index', compact('jobs'));
     }
@@ -99,4 +101,38 @@ class JobController extends Controller
 
         return back()->with('success', 'Application status updated.');
     }
+
+        public function bookmark($id)
+    {
+        $job = Job::findOrFail($id);
+
+        // Avoid duplicate
+        if (!Bookmark::where('user_id', auth()->id())->where('job_id', $id)->exists()) {
+            Bookmark::create([
+                'user_id' => auth()->id(),
+                'job_id' => $id,
+            ]);
+        }
+
+        return back()->with('success', 'Job saved.');
+    }
+    public function unbookmark($id)
+    {
+        Bookmark::where('user_id', auth()->id())
+            ->where('job_id', $id)
+            ->delete();
+
+        return back()->with('success', 'Job removed from saved.');
+    }
+
+    public function saved()
+    {
+        $bookmarkedJobs = Bookmark::where('user_id', auth()->id())
+            ->with('job')
+            ->latest()
+            ->paginate(10);
+
+        return view('jobseeker.jobs.saved', ['bookmarks' => $bookmarkedJobs]);
+    }
+
 }

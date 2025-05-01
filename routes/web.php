@@ -43,12 +43,15 @@ Route::middleware(['auth', 'employer'])->group(function () {
 Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::view('/jobseeker/dashboard', 'jobseeker.dashboard');
     Route::get('/jobs', [JobController::class, 'index']);
+    Route::get('/jobs/saved', [JobController::class, 'saved']);
     Route::get('/jobs/{job}', [JobController::class, 'show']);
     Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store']);
     Route::get('/applications', [ApplicationController::class, 'myApplications']);
     Route::get('/applications/{id}/edit', [ApplicationController::class, 'edit']);
     Route::post('/applications/{id}/update', [ApplicationController::class, 'update']);
     Route::delete('/applications/{id}', [ApplicationController::class, 'destroy']);
+    Route::post('/jobs/{id}/bookmark', [JobController::class, 'bookmark']);
+    Route::delete('/jobs/{id}/unbookmark', [JobController::class, 'unbookmark']);
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
