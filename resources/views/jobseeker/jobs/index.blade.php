@@ -21,14 +21,19 @@
             <li>
                 <a href="{{ url('/jobs/' . $job->id) }}">{{ $job->title }}</a>
                 ({{ $job->location }}, {{ $job->type }})
-                <form action="{{ url('/jobs/' . $job->id . '/bookmark') }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit">Save</button>
-                </form>
+
+                @if(in_array($job->id, $savedJobIds))
+                    <span style="color: green;">✔ Saved</span>
+                @else
+                    <form action="{{ url('/jobs/' . $job->id . '/bookmark') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit">Save</button>
+                    </form>
+                @endif
             </li>
         @endforeach
     </ul>
-    
+
     {{-- Pagination --}}
     {{ $jobs->withQueryString()->links() }}
 @endif

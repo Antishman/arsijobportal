@@ -55,9 +55,12 @@ class JobController extends Controller
             $query->where('type', $request->type);
         }
 
-        $jobs = $query->latest()->paginate(10); // 10 jobs per page
+        $jobs = $query->latest()->paginate(10);
 
-        return view('jobseeker.jobs.index', compact('jobs'));
+        // Get IDs of jobs the user has already bookmarked
+        $savedJobIds = \App\Models\Bookmark::where('user_id', auth()->id())->pluck('job_id')->toArray();
+
+        return view('jobseeker.jobs.index', compact('jobs', 'savedJobIds'));
     }
 
 
