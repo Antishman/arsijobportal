@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Job;
+use App\Models\Resume;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,20 +18,30 @@ class ApplicationController extends Controller
             'cover_letter' => 'required|string',
             'resume' => 'nullable|file|mimes:pdf|max:2048',
         ]);
-    
+
         $job = Job::findOrFail($jobId);
-    
+
         // Prevent duplicate applications
         if ($job->applications()->where('user_id', Auth::id())->exists()) {
             return back()->with('error', 'You already applied to this job.');
         }
-    
-        // Handle resume file if uploaded
+
         $resumePath = null;
+
+        // If user uploaded a file, use it
         if ($request->hasFile('resume')) {
             $resumePath = $request->file('resume')->store('resumes', 'public');
+        } else {
+            // Otherwise, generate from stored Resume Builder data
+            $resume = Resume::where('user_id', Auth::id())->first();
+
+            if ($resume) {
+                $pdf = Pdf::loadView('jobseeker.resume.pdf', compact('resume'));
+                $resumePath = 'resumes/' . uniqid() . '.pdf';
+                Storage::disk('public')->put($resumePath, $pdf->output());
+            }
         }
-    
+
         // Save application
         $application = new Application();
         $application->job_id = $job->id;
@@ -36,7 +49,7 @@ class ApplicationController extends Controller
         $application->cover_letter = $request->cover_letter;
         $application->resume = $resumePath;
         $application->save();
-    
+
         return back()->with('success', 'Application submitted successfully!');
     }
 

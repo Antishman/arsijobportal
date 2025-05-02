@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ApplicationController;
 
 /*
@@ -52,6 +53,9 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::delete('/applications/{id}', [ApplicationController::class, 'destroy']);
     Route::post('/jobs/{id}/bookmark', [JobController::class, 'bookmark']);
     Route::delete('/jobs/{id}/unbookmark', [JobController::class, 'unbookmark']);
+    Route::get('/resume/create', [ResumeController::class, 'create']);
+    Route::post('/resume', [ResumeController::class, 'store']);
+    Route::get('/resume/preview', [ResumeController::class, 'preview']);
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
