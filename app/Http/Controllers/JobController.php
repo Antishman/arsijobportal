@@ -9,6 +9,7 @@ use App\Models\Bookmark;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\ApplicationStatusNotification;
 
 class JobController extends Controller
 {
@@ -100,22 +101,30 @@ class JobController extends Controller
         return view('employer.jobs.applications', compact('job'));
     }
 
-    public function updateStatus($applicationId, Request $request)
+    public function updateStatus(Request $request, $applicationId)
     {
+        // Validate input
         $request->validate([
             'status' => 'required|in:accepted,rejected',
         ]);
-
+    
+        // Load application with related job
         $application = Application::with('job')->findOrFail($applicationId);
-
-        // Ensure the employer owns the job
+    
+        // ✅ Ensure the employer owns the job
         if ($application->job->user_id !== auth()->id()) {
             abort(403, 'Unauthorized');
         }
-
+    
+        // Update status
         $application->status = $request->status;
         $application->save();
-
+    
+        // ✅ Notify the jobseeker
+        $application->user->notify(
+            new ApplicationStatusNotification($application->job->title, $application->status)
+        );
+    
         return back()->with('success', 'Application status updated.');
     }
 

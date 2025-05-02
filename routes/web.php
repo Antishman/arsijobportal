@@ -56,8 +56,13 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::get('/resume/create', [ResumeController::class, 'create']);
     Route::post('/resume', [ResumeController::class, 'store']);
     Route::get('/resume/preview', [ResumeController::class, 'preview']);
+    
+    
 });
-
+Route::post('/notifications/read-all', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return back();
+});
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard']);
     Route::post('/admin/jobs/{id}/status', [AdminController::class, 'updateJobStatus']);

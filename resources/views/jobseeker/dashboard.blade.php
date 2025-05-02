@@ -1,11 +1,28 @@
 <h2>Jobseeker Dashboard</h2>
-<a href="/jobs">Browse Jobs</a><br>
-<a href="/jobs/saved">Saved Jobs</a>
-<a href="/applications">My Applications</a><br>
-<p>
-    <a href="{{ url('/resume/create') }}">📝 Build or Update Your Resume</a>
-</p>
 
-<a href="/logout">Logout</a>
+<nav>
+    <a href="/jobs">📂 Browse Jobs</a><br>
+    <a href="/jobs/saved">💾 Saved Jobs</a><br>
+    <a href="/applications">📨 My Applications</a><br>
+    <a href="{{ url('/resume/create') }}">📝 Build or Update Your Resume</a><br>
+    <a href="/logout">🚪 Logout</a>
+</nav>
 
+<hr>
 
+@if(auth()->user()->unreadNotifications->count())
+    <p style="color: #e67e22;">
+        🔔 You have {{ auth()->user()->unreadNotifications->count() }} new notification(s)
+    </p>
+
+    <ul>
+        @foreach(auth()->user()->unreadNotifications as $notification)
+            <li>{{ $notification->data['message'] }}</li>
+        @endforeach
+    </ul>
+
+    <form method="POST" action="{{ url('/notifications/read-all') }}">
+        @csrf
+        <button type="submit">Mark all as read</button>
+    </form>
+@endif
