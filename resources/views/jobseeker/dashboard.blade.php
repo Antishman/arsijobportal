@@ -1,3 +1,19 @@
+@if($announcements->count())
+    <h3>📢 Announcements</h3>
+    <ul>
+        @foreach($announcements as $announcement)
+            <li>
+                <strong>{{ $announcement->title }}</strong><br>
+                {{ $announcement->message }}<br>
+                @if($announcement->link)
+                    <a href="{{ $announcement->link }}" target="_blank">🔗 View Resource</a>
+                @endif
+                <hr>
+            </li>
+        @endforeach
+    </ul>
+@endif
+
 <h2>Jobseeker Dashboard</h2>
 
 <nav>

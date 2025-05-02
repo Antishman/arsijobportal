@@ -7,6 +7,7 @@ use App\Models\Job;
 use App\Models\User;
 use App\Models\Bookmark;
 use App\Models\Application;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ApplicationStatusNotification;
@@ -159,6 +160,15 @@ class JobController extends Controller
             ->paginate(10);
 
         return view('jobseeker.jobs.saved', ['bookmarks' => $bookmarkedJobs]);
+    }
+
+    public function jobseekerDashboard()
+    {
+        // Fetch latest 5 announcements
+        $announcements = Announcement::latest()->take(5)->get();
+
+        // Pass them to the dashboard view
+        return view('jobseeker.dashboard', compact('announcements'));
     }
 
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AdminAnnouncementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,8 +57,8 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::get('/resume/create', [ResumeController::class, 'create']);
     Route::post('/resume', [ResumeController::class, 'store']);
     Route::get('/resume/preview', [ResumeController::class, 'preview']);
-    
-    
+    Route::get('/jobseeker/dashboard', [JobController::class, 'jobseekerDashboard'])->name('jobseeker.dashboard');
+     
 });
 Route::post('/notifications/read-all', function () {
     auth()->user()->unreadNotifications->markAsRead();
@@ -68,4 +69,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/admin/jobs/{id}/status', [AdminController::class, 'updateJobStatus']);
     Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
     Route::delete('/admin/jobs/{id}', [AdminController::class, 'deleteJob']);
+    Route::get('/announcements', [AdminAnnouncementController::class, 'index'])->name('admin.announcements.index');
+    Route::get('/announcements/create', [AdminAnnouncementController::class, 'create'])->name('admin.announcements.create');
+    Route::post('/announcements', [AdminAnnouncementController::class, 'store'])->name('admin.announcements.store');
+    Route::delete('/announcements/{id}', [AdminAnnouncementController::class, 'destroy'])->name('admin.announcements.destroy');;
 });

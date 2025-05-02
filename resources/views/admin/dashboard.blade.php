@@ -1,5 +1,8 @@
 <h2>Admin Dashboard</h2>
-
+<nav>
+    <a href="{{ route('admin.announcements.index') }}">📢 Manage Announcements</a><br>
+    <!-- other admin links -->
+</nav>
 <h3>📊 Site Analytics</h3>
 <ul>
     <li>Total Jobseekers: {{ $jobseekerCount }}</li>
