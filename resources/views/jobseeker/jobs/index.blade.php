@@ -22,6 +22,8 @@
                 <a href="{{ url('/jobs/' . $job->id) }}">{{ $job->title }}</a>
                 ({{ $job->location }}, {{ $job->type }})
 
+                <p>Deadline: {{ $job->deadline ?? 'No deadline' }}</p>
+
                 @if(in_array($job->id, $savedJobIds))
                     <span style="color: green;">✔ Saved</span>
                 @else

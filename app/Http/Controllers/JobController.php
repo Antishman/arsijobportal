@@ -25,6 +25,7 @@ class JobController extends Controller
             'location' => 'required|string',
             'type' => 'required|string',
             'salary' => 'nullable|string',
+            'deadline' => 'nullable|date|after_or_equal:today',
         ]);
 
         $job = new Job();
@@ -34,6 +35,8 @@ class JobController extends Controller
         $job->location = $request->location;
         $job->type = $request->type;
         $job->salary = $request->salary;
+        $job->deadline = $request->deadline; // ✅ Include deadline
+        $job->status = 'pending'; // Optional: default status for moderation
         $job->save();
 
         return redirect('/employer/dashboard')->with('success', 'Job posted successfully!');
@@ -41,27 +44,38 @@ class JobController extends Controller
 
     public function index(Request $request)
     {
-        $query = Job::where('status', 'approved');
-
+        $today = now()->toDateString();
+    
+        $query = Job::where('status', 'approved')
+            ->where(function ($q) use ($today) {
+                $q->whereNull('deadline')
+                  ->orWhere('deadline', '>=', $today);
+            });
+    
+        // Filters
         if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
         }
-
+    
         if ($request->filled('location')) {
             $query->where('location', 'like', '%' . $request->location . '%');
         }
-
+    
         if ($request->filled('type')) {
             $query->where('type', $request->type);
         }
-
+    
+        // Paginate results
         $jobs = $query->latest()->paginate(10);
-
-        // Get IDs of jobs the user has already bookmarked
-        $savedJobIds = \App\Models\Bookmark::where('user_id', auth()->id())->pluck('job_id')->toArray();
-
+    
+        // Get bookmarked job IDs for current user
+        $savedJobIds = \App\Models\Bookmark::where('user_id', auth()->id())
+            ->pluck('job_id')
+            ->toArray();
+    
         return view('jobseeker.jobs.index', compact('jobs', 'savedJobIds'));
     }
+    
 
 
 
