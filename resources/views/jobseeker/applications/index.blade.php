@@ -1,33 +1,92 @@
-<h2>My Applications</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Applications</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { inter: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: '#002f66',
+                        accent: '#FF6600',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-gray-100 min-h-screen">
 
-@if($applications->isEmpty())
-    <p>You haven't applied to any jobs yet.</p>
-@else
-    <ul>
-        @foreach($applications as $application)
-            <li>
-                <strong>{{ $application->job->title }}</strong> ({{ $application->job->location }})<br>
-                Applied on: {{ $application->created_at->format('Y-m-d') }}<br>
+    <!-- Header -->
+    <header class="bg-primary text-white px-6 py-4 shadow">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-semibold">My Applications</h1>
+            <a href="/jobseeker/dashboard" class="text-sm underline hover:text-gray-200">← Back to Dashboard</a>
+        </div>
+    </header>
 
-                <p>Status: <strong>{{ ucfirst($application->status) }}</strong></p>
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 py-10 space-y-6">
+        @if($applications->isEmpty())
+            <div class="bg-white p-6 rounded-lg shadow text-gray-600 text-center animate-fade-in">
+                <p>You haven't applied to any jobs yet.</p>
+            </div>
+        @else
+            @foreach($applications as $application)
+                <div class="bg-white p-6 rounded-lg shadow animate-fade-in-up transition duration-300 ease-in-out hover:shadow-lg">
+                    <h2 class="text-xl font-semibold text-primary mb-1">{{ $application->job->title }}</h2>
+                    <p class="text-gray-600">{{ $application->job->location }}</p>
+                    <p class="text-sm text-gray-500">Applied on: {{ $application->created_at->format('Y-m-d') }}</p>
 
-                @if($application->status === 'pending')
-                    <a href="{{ url('/applications/' . $application->id . '/edit') }}">Edit</a>
+                    <p class="mt-3 text-sm">
+                        Status:
+                        <span class="font-semibold {{ $application->status === 'accepted' ? 'text-green-600' : ($application->status === 'rejected' ? 'text-red-600' : 'text-yellow-600') }}">
+                            {{ ucfirst($application->status) }}
+                        </span>
+                    </p>
 
-                    <form action="{{ url('/applications/' . $application->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" onclick="return confirm('Are you sure you want to withdraw this application?')">
-                            Withdraw
-                        </button>
-                    </form>
-                @endif
+                    @if($application->status === 'pending')
+                        <div class="mt-3 flex gap-3 flex-wrap">
+                            <a href="{{ url('/applications/' . $application->id . '/edit') }}"
+                               class="bg-accent text-white px-4 py-2 rounded hover:bg-orange-700 transition">
+                                Edit
+                            </a>
 
-                <em>Cover Letter:</em> {{ $application->cover_letter }}<br>
-                <hr>
-            </li>
-        @endforeach
-    </ul>
-@endif
+                            <form action="{{ url('/applications/' . $application->id) }}" method="POST"
+                                  onsubmit="return confirm('Are you sure you want to withdraw this application?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition">
+                                    Withdraw
+                                </button>
+                            </form>
+                        </div>
+                    @endif
 
-<a href="/jobseeker/dashboard">← Back to Dashboard</a>
+                    <div class="mt-4 text-sm text-gray-700">
+                        <p class="font-medium text-gray-800 mb-1">Cover Letter:</p>
+                        <p class="whitespace-pre-line">{{ $application->cover_letter }}</p>
+                    </div>
+                </div>
+            @endforeach
+        @endif
+    </main>
+
+    <!-- Animations -->
+    <style>
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fade-in 0.4s ease-out; }
+        .animate-fade-in-up { animation: fade-in 0.5s ease-out both; }
+    </style>
+
+</body>
+</html>
