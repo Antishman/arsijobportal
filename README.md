@@ -1,66 +1,202 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Arsi University Job Portal
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern web application developed using **Laravel** and **Tailwind CSS**, designed to connect **jobseekers**, **employers**, and **administrators** through a seamless experience tailored for Arsi University students and partners.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Features Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🧑‍💼 Jobseekers
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### 🔍 Browse Jobs
 
-## Learning Laravel
+* Explore all posted jobs with filters (by title, category, location, and date).
+* Paginated list for user-friendly navigation.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### 💾 Save Jobs
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+* Bookmark jobs for later viewing.
+* View all saved jobs in one place.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### 📨 Apply for Jobs
 
-## Laravel Sponsors
+* Submit applications directly through the portal.
+* Prevent duplicate applications.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+#### 📝 Resume Builder
 
-### Premium Partners
+* Create and update a professional resume using a guided form.
+* Downloadable PDF format (future enhancement).
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+#### 🔔 Notifications
 
-## Contributing
+* Get notified when employers interact with your application.
+* See unread and read notifications.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### 📢 Announcements
 
-## Code of Conduct
+* Receive university-wide or jobseeker-targeted announcements.
+* View announcements in a clean panel with external resource links.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### 👤 Dashboard
 
-## Security Vulnerabilities
+* Personalized dashboard showing saved jobs, announcements, and new notifications.
+* Elegant UI with icons, colors, and responsive layout.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 🏢 Employers
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### 📄 Post Jobs
+
+* Employers can create job posts with title, description, requirements, and location.
+* Each job defaults to `pending` until approved by an admin.
+
+#### 🗂 Manage Posted Jobs
+
+* View all posted jobs.
+* Delete jobs at any time.
+* Access applications received for each job.
+
+#### 📥 View Applications
+
+* For each job, see the list of applicants.
+* View resumes and profiles of jobseekers.
+
+#### 👤 Dashboard
+
+* Employer-focused view showing job post history.
+* Access to create jobs, view applications.
+
+---
+
+### 🛠️ Admin
+
+#### 📢 Manage Announcements
+
+* Create, edit, and delete announcements for jobseekers and employers.
+* Optional links for external resources.
+
+#### 📊 Site Analytics
+
+* Dashboard with counts of jobseekers, employers, jobs, and applications.
+* Simple overview cards with icons.
+
+#### 👥 Manage Users
+
+* View list of all users.
+* See roles and emails.
+* Delete users directly.
+
+#### 📌 Manage Jobs
+
+* View all jobs posted.
+* Approve, reject, or delete jobs.
+* Monitor job activity.
+
+---
+
+## 🧱 Tech Stack
+
+* **Laravel 10** - backend framework
+* **Tailwind CSS** - modern utility-first UI framework
+* **Blade Templates** - server-side rendering
+* **MySQL** - database
+* **Authentication** - Laravel Breeze&#x20;
+
+---
+
+## 📁 Folder Structure (Key Files)
+
+```
+├── app/Http/Controllers
+│   ├── JobController.php
+│   ├── ApplicationController.php
+│   ├── ResumeController.php
+│   ├── AdminController.php
+│   └── AnnouncementController.php
+├── resources/views
+│   ├── jobseeker/dashboard.blade.php
+│   ├── employer/dashboard.blade.php
+│   ├── admin/dashboard.blade.php
+├── routes/web.php
+├── public/
+└── database/migrations/
+```
+
+---
+
+## 🧪 Testing & Validation
+
+* Forms include CSRF protection.
+* Confirm dialogs before destructive actions (deleting users, jobs).
+* Session-based flash messages for feedback.
+* Validation rules applied to forms.
+
+---
+
+## 🎨 Design System
+
+* **Colors**: Primary `#002f66`, Accent `#FF6600`, Light Grays
+* **Fonts**: [Inter](https://fonts.google.com/specimen/Inter)
+* **Icons**: Emoji-enhanced sections for visual clarity
+* **Responsive**: Tailwind breakpoints used for all layouts
+
+---
+
+## ✅ Future Enhancements
+
+* PDF Resume Download
+* Job Expiry and Archive System
+* Employer Verification Workflow
+* Advanced Notification Panel
+* Role-based Permissions (Gate & Policies)
+
+---
+
+## 🔒 Authentication & Roles
+
+* Auth middleware controls access.
+* Roles defined: `jobseeker`, `employer`, `admin`
+* Route-level protections to prevent unauthorized actions
+
+---
+
+## 📎 Setup Instructions
+
+```bash
+# Clone the repo
+git clone https://github.com/antishman/arsi-job-portal.git
+cd arsi-job-portal
+
+# Install dependencies
+composer install
+npm install && npm run dev
+
+# Environment setup
+cp .env.example .env
+php artisan key:generate
+
+# Configure database
+php artisan migrate --seed
+
+# Run the server
+php artisan serve
+```
+
+---
+
+## 🙌 Credits
+
+* Developed for Arsi University
+* UI/UX designed with accessibility and clarity in mind
+
+---
+
+## 📬 Contact
+
+For questions, suggestions or contributions: **Tele**:+251222380252  **GitHub**: \[[https://github.com/antishman/arsi-job-portal.git](https://github.com/antishman/arsi-job-portal.git)]
+
+---
+
+*Thank you for using Arsi University's Job Portal!*
