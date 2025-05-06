@@ -166,7 +166,7 @@ A modern web application developed using **Laravel** and **Tailwind CSS**, desig
 
 ```bash
 # Clone the repo
-git clone https://github.com/antishman/arsi-job-portal.git
+git clone https://github.com/antishman/arsijobportal.git
 cd arsi-job-portal
 
 # Install dependencies
@@ -195,7 +195,7 @@ php artisan serve
 
 ## 📬 Contact
 
-For questions, suggestions or contributions: **Tele**:+251222380252  **GitHub**: \[[https://github.com/antishman/arsi-job-portal.git](https://github.com/antishman/arsi-job-portal.git)]
+For questions, suggestions or contributions: **Tele**:+251222380252  **GitHub**: \[[LINK](https://github.com/antishman/arsi-job-portal.git)]
 
 ---
 
