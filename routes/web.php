@@ -5,6 +5,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResumeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AdminAnnouncementController;
 
@@ -58,7 +59,9 @@ Route::middleware(['auth', 'jobseeker'])->group(function () {
     Route::post('/resume', [ResumeController::class, 'store']);
     Route::get('/resume/preview', [ResumeController::class, 'preview']);
     Route::get('/jobseeker/dashboard', [JobController::class, 'jobseekerDashboard'])->name('jobseeker.dashboard');
-     
+    Route::get('/jobseeker/profile/edit', [ProfileController::class, 'edit'])->name('jobseeker.profile.edit');
+    Route::post('/jobseeker/profile/update', [ProfileController::class, 'update'])->name('jobseeker.profile.update');
+
 });
 Route::post('/notifications/read-all', function () {
     auth()->user()->unreadNotifications->markAsRead();

@@ -52,6 +52,58 @@
                 <p class="text-sm text-gray-600 mt-1">Manage your applications, resume, and more.</p>
             </section>
 
+            @if(auth()->user()->profile)
+    <section class="bg-white border border-gray-200 rounded-xl p-6 shadow mt-8">
+        <h3 class="text-xl font-semibold text-primary mb-4">👤 Your Profile</h3>
+
+        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm text-gray-800">
+            <div>
+                <dt class="font-medium text-gray-600">📞 Phone:</dt>
+                <dd>{{ auth()->user()->profile->phone ?? 'Not Provided' }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-gray-600">📍 Address:</dt>
+                <dd>{{ auth()->user()->profile->address ?? 'Not Provided' }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-gray-600">📝 Bio:</dt>
+                <dd>{{ auth()->user()->profile->bio ?? 'Not Provided' }}</dd>
+            </div>
+            <div>
+                <dt class="font-medium text-gray-600">🔗 LinkedIn:</dt>
+                <dd>
+                    @if(auth()->user()->profile->linkedin)
+                        <a href="{{ auth()->user()->profile->linkedin }}" class="text-accent hover:underline" target="_blank">
+                            View LinkedIn
+                        </a>
+                    @else
+                        Not Provided
+                    @endif
+                </dd>
+            </div>
+            <div>
+                <dt class="font-medium text-gray-600">🌐 Website:</dt>
+                <dd>
+                    @if(auth()->user()->profile->website)
+                        <a href="{{ auth()->user()->profile->website }}" class="text-accent hover:underline" target="_blank">
+                            Visit Website
+                        </a>
+                    @else
+                        Not Provided
+                    @endif
+                </dd>
+            </div>
+        </dl>
+
+        <div class="mt-6 text-right">
+            <a href="{{ route('jobseeker.profile.edit') }}"
+               class="inline-block bg-primary text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+                ✏️ Edit Profile
+            </a>
+        </div>
+    </section>
+@endif
+
             <!-- Announcements -->
             @if($announcements->count())
             <section class="bg-blue-50 border border-blue-200 rounded-xl p-6 space-y-4">
@@ -112,6 +164,11 @@
             @endif
 
         </div>
+        <a href="{{ route('jobseeker.profile.edit') }}" class="text-blue-600 hover:underline">
+            Edit Profile
+        </a>
+        
+
     </main>
 
     <!-- Footer -->
