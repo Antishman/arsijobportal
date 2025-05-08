@@ -10,6 +10,10 @@
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen text-gray-800">
+    <a href="/admin/dashboard" class="text-white bg-[#002f66] rounded px-4 py-2 text-sm hover:bg-[#001f4d] transition">
+        ← Back to Dashboard
+      </a>
+      
 
     <div class="max-w-5xl mx-auto py-10 px-4">
         <div class="flex justify-between items-center mb-6">
@@ -52,6 +56,5 @@
             {{ $announcements->links() }}
         </div>
     </div>
-
 </body>
 </html>

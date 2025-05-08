@@ -18,7 +18,10 @@
     <header class="bg-primary text-white shadow">
         <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
             <h1 class="text-2xl font-bold">🎓 Arsi University - Admin Dashboard</h1>
-            <a href="/logout" class="text-sm hover:underline hover:text-accent transition">Logout</a>
+            <a href="/logout" class="text-white bg-[#002f66] rounded px-4 py-2 text-sm hover:bg-[#001f4d] transition">
+                Logout
+              </a>
+              
         </div>
     </header>
 
@@ -28,9 +31,10 @@
         <!-- Navigation -->
         <nav class="flex gap-4">
             <a href="{{ route('admin.announcements.index') }}"
-               class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-accent hover:text-white transition">
-                📢 Manage Announcements
+            class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-[#002f66] hover:text-white transition">
+             📢 Manage Announcements
             </a>
+         
             <!-- Add more nav items here -->
         </nav>
 

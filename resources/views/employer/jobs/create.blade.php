@@ -83,6 +83,7 @@
                     </button>
                 </div>
             </form>
+            <a href="/employer/dashboard" class="text-sm hover:underline">← Back to Dashboard</a>
         </div>
     </main>
 </body>

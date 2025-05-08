@@ -57,7 +57,10 @@
                 🔐 Login
             </button>
         </form>
-
+        
+        <p class="text-center text-sm text-gray-500 mt-4">
+            don't have an account? <a href="/register" class="text-accent hover:underline">Register here</a>
+        </p>
         <p class="text-center text-sm text-gray-500 mt-4">
             Having trouble? Contact IT support at <a href="mailto:support@arsiuniversity.edu.et" class="text-accent hover:underline">support@arsiuniversity.edu.et</a>
         </p>
