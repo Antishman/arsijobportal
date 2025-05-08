@@ -34,7 +34,10 @@
             class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-[#002f66] hover:text-white transition">
              📢 Manage Announcements
             </a>
-         
+            <a href="{{ route('admin.tags.index') }}" class="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-[#002f66] hover:text-white transition">
+                🔖 Manage Tags
+            </a>
+            
             <!-- Add more nav items here -->
         </nav>
 

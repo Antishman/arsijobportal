@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AdminAnnouncementController;
 
@@ -76,4 +77,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/announcements/create', [AdminAnnouncementController::class, 'create'])->name('admin.announcements.create');
     Route::post('/announcements', [AdminAnnouncementController::class, 'store'])->name('admin.announcements.store');
     Route::delete('/announcements/{id}', [AdminAnnouncementController::class, 'destroy'])->name('admin.announcements.destroy');;
+});
+
+
+Route::middleware(['auth', 'admin'])->prefix('admin/tags')->name('admin.tags.')->group(function () {
+    Route::get('/', [TagController::class, 'index'])->name('index');
+    Route::get('/create', [TagController::class, 'create'])->name('create');
+    Route::post('/', [TagController::class, 'store'])->name('store');
+    Route::get('/{tag}/edit', [TagController::class, 'edit'])->name('edit');
+    Route::put('/{tag}', [TagController::class, 'update'])->name('update');
+    Route::delete('/{tag}', [TagController::class, 'destroy'])->name('destroy');
 });
