@@ -52,11 +52,14 @@
                 Search
             </button>
         </form>
-        <form method="GET" action="/jobs">
-            <button type="submit" name="all" value="1" class="text-sm text-blue-600 underline">
-                View All Jobs
+        <form method="GET" action="/jobs" class="mb-4">
+            <button type="submit" name="all" value="1"
+                class="bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-blue-900 transition w-full sm:w-auto">
+                🔍 View All Jobs
             </button>
         </form>
+        
+        
         
         @if($jobs->isEmpty())
             <div class="text-center bg-white p-6 rounded-lg shadow animate-fade-in">

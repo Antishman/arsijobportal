@@ -93,6 +93,23 @@
                     @endif
                 </dd>
             </div>
+            <div>
+                <dt class="font-medium text-gray-600">🏷️ Tags:</dt>
+                <dd>
+                    @if(auth()->user()->tags->isNotEmpty())
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            @foreach(auth()->user()->tags as $tag)
+                                <span class="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">
+                                    {{ $tag->name }}
+                                </span>
+                            @endforeach
+                        </div>
+                    @else
+                        <span class="text-gray-500">No tags selected</span>
+                    @endif
+                </dd>
+            </div>
+            
         </dl>
 
         <div class="mt-6 text-right">
@@ -164,9 +181,13 @@
             @endif
 
         </div>
-        <a href="{{ route('jobseeker.profile.edit') }}" class="text-blue-600 hover:underline">
-            Edit Profile
-        </a>
+        <div class="mb-4">
+            <a href="{{ route('jobseeker.profile.edit') }}"
+               class="inline-block bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-blue-900 transition">
+                Profile
+            </a>
+        </div>
+        
         
 
     </main>

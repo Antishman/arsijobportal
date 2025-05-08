@@ -28,7 +28,6 @@
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen">
-
     <div class="max-w-3xl mx-auto px-6 py-10 animate-fade-in-up">
         <!-- Job Details -->
         <div class="bg-white p-8 rounded-xl shadow">
@@ -75,6 +74,7 @@
                     </button>
                 </div>
             </form>
+            <a href="/jobs" class="text-[#002f66] underline hover:text-blue-900">← Back</a>
         </div>
     </div>
 
