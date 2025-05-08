@@ -28,12 +28,37 @@
     <header class="bg-primary text-white py-5 shadow">
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
             <h1 class="text-xl font-semibold">🏢 Employer Dashboard</h1>
-            <a href="/logout" class="text-sm underline hover:text-gray-200">Logout</a>
+            <a href="/logout" class="text-sm hover:[color:#FF6600]">Logout</a>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="flex-grow py-10 px-4">
+        <h2 class="text-2xl font-bold text-primary mb-6">📊 Dashboard Analytics</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            <div class="bg-white p-5 rounded-xl shadow">
+                <h3 class="text-sm font-semibold text-gray-600 mb-2">📥 Total Applications</h3>
+                <p class="text-3xl text-primary font-bold">{{ $totalApplications }}</p>
+            </div>
+        
+            <div class="bg-white p-5 rounded-xl shadow">
+                <h3 class="text-sm font-semibold text-gray-600 mb-2">🔁 Avg. Matches Per Job</h3>
+                <p class="text-3xl text-primary font-bold">{{ $averageMatches }}</p>
+            </div>
+        
+            <div class="bg-white p-5 rounded-xl shadow">
+                <h3 class="text-sm font-semibold text-gray-600 mb-2">🏷️ Top Tags</h3>
+                <ul class="list-disc list-inside text-sm text-gray-700 mt-2">
+                    @forelse($topTags as $tag)
+                        <li>{{ $tag->name }} ({{ $tag->usage_count }})</li>
+                    @empty
+                        <li>No tags used</li>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+        
         <div class="max-w-6xl mx-auto space-y-10">
 
             <!-- Title + Action -->

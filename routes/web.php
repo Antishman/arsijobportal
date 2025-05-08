@@ -35,7 +35,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'employer'])->group(function () {
-    Route::view('/employer/dashboard', 'employer.dashboard');
+    Route::get('/employer/dashboard', [JobController::class, 'employerDashboard']);
     Route::get('/employer/jobs', [JobController::class, 'create']);
     Route::post('/employer/jobs', [JobController::class, 'store']);
     Route::delete('/employer/jobs/{job}', [JobController::class, 'destroy']);

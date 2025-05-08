@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+
 
 use App\Models\Job;
 use App\Models\Tag;
@@ -11,6 +11,7 @@ use App\Models\Bookmark;
 use App\Models\Application;
 use App\Models\Announcement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\ApplicationStatusNotification;
 
@@ -191,5 +192,49 @@ class JobController extends Controller
         // Pass them to the dashboard view
         return view('jobseeker.dashboard', compact('announcements'));
     }
+    public function employerDashboard()
+{
+    $employer = Auth::user();
 
+    // Get all jobs by the employer with applications and tags
+    $jobs = Job::withCount('applications')
+        ->with('tags')
+        ->where('user_id', $employer->id)
+        ->get();
+
+    // 1. Total applications received
+    $totalApplications = $jobs->sum('applications_count');
+
+    // 2. Average matching jobseekers per job
+    $matchCounts = [];
+    foreach ($jobs as $job) {
+        $tagIds = $job->tags->pluck('id');
+
+        $matchCount = DB::table('user_tag')
+            ->whereIn('tag_id', $tagIds)
+            ->distinct('user_id')
+            ->count('user_id');
+
+        $matchCounts[] = $matchCount;
+    }
+    $averageMatches = count($matchCounts) > 0 ? round(array_sum($matchCounts) / count($matchCounts), 1) : 0;
+
+    // 3. Top 3 tags across the employer's jobs
+    $topTags = DB::table('job_tag')
+        ->join('tags', 'job_tag.tag_id', '=', 'tags.id')
+        ->join('jobs', 'job_tag.job_id', '=', 'jobs.id')
+        ->where('jobs.user_id', $employer->id)
+        ->select('tags.name', DB::raw('COUNT(*) as usage_count'))
+        ->groupBy('tags.name')
+        ->orderByDesc('usage_count')
+        ->limit(3)
+        ->get();
+
+    return view('employer.dashboard', compact(
+        'jobs',
+        'totalApplications',
+        'averageMatches',
+        'topTags'
+    ));
+}
 }
