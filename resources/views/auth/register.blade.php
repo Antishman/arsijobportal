@@ -77,6 +77,9 @@
         <p class="text-center text-sm text-gray-500 mt-4">
             Already have an account? <a href="/login" class="text-accent hover:underline">Login here</a>
         </p>
+        <p class="text-center text-sm text-gray-500 mt-4">
+            <a href="/" class="text-accent hover:underline">Home</a>
+        </p>
     </div>
 
 </body>
