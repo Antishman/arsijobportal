@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
+use DB;
 
+use App\Models\Job;
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Bookmark;
 use App\Models\Application;
@@ -16,9 +18,9 @@ class JobController extends Controller
 {
     public function create()
     {
-        return view('employer.jobs.create');
+        $tags = Tag::all(); // Fetch all available tags from the database
+        return view('employer.jobs.create', compact('tags'));
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -28,33 +30,43 @@ class JobController extends Controller
             'type' => 'required|string',
             'salary' => 'nullable|string',
             'deadline' => 'nullable|date|after_or_equal:today',
+            'tags' => 'nullable|array',
+            'tags.*' => 'exists:tags,id',
         ]);
 
         $job = new Job();
-        $job->user_id = Auth::id(); // Assign employer ID manually
+        $job->user_id = Auth::id();
         $job->title = $request->title;
         $job->description = $request->description;
         $job->location = $request->location;
         $job->type = $request->type;
         $job->salary = $request->salary;
-        $job->deadline = $request->deadline; // ✅ Include deadline
-        $job->status = 'pending'; // Optional: default status for moderation
+        $job->deadline = $request->deadline;
+        $job->status = 'pending';
         $job->save();
+
+        // Sync tags if selected
+        if ($request->filled('tags')) {
+            $job->tags()->sync($request->tags);
+        }
 
         return redirect('/employer/dashboard')->with('success', 'Job posted successfully!');
     }
 
     public function index(Request $request)
     {
+        $user = Auth::user();
+        $showAll = $request->has('all'); // Toggle for all jobs or matched tags only
         $today = now()->toDateString();
     
+        // Base query: only approved and not expired jobs
         $query = Job::where('status', 'approved')
             ->where(function ($q) use ($today) {
                 $q->whereNull('deadline')
                   ->orWhere('deadline', '>=', $today);
             });
     
-        // Filters
+        // Apply filters
         if ($request->filled('title')) {
             $query->where('title', 'like', '%' . $request->title . '%');
         }
@@ -67,16 +79,25 @@ class JobController extends Controller
             $query->where('type', $request->type);
         }
     
-        // Paginate results
+        // Tag-based filtering (only if 'all' not present)
+        if (!$showAll) {
+            $userTagIds = $user->tags->pluck('id');
+            $query->whereHas('tags', function ($q) use ($userTagIds) {
+                $q->whereIn('tags.id', $userTagIds);
+            });
+        }
+    
+        // Final job list
         $jobs = $query->latest()->paginate(10);
     
-        // Get bookmarked job IDs for current user
-        $savedJobIds = \App\Models\Bookmark::where('user_id', auth()->id())
+        // Bookmarked jobs for the logged-in user
+        $savedJobIds = \App\Models\Bookmark::where('user_id', $user->id)
             ->pluck('job_id')
             ->toArray();
     
         return view('jobseeker.jobs.index', compact('jobs', 'savedJobIds'));
     }
+    
     
 
 

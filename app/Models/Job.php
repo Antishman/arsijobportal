@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,7 +22,11 @@ class Job extends Model
         return $this->hasMany(Application::class);
     }
 
-   
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'job_tag');
+    }
+
 
 
 }

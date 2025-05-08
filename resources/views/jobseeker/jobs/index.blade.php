@@ -52,7 +52,12 @@
                 Search
             </button>
         </form>
-
+        <form method="GET" action="/jobs">
+            <button type="submit" name="all" value="1" class="text-sm text-blue-600 underline">
+                View All Jobs
+            </button>
+        </form>
+        
         @if($jobs->isEmpty())
             <div class="text-center bg-white p-6 rounded-lg shadow animate-fade-in">
                 <p class="text-gray-600">No jobs match your search criteria. Please try again later.</p>

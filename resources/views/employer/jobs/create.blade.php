@@ -75,6 +75,17 @@
                             class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-accent focus:border-accent px-4 py-2">
                     </div>
                 </div>
+                <label class="block text-sm font-medium text-gray-700">Tags:</label>
+                <div class="flex flex-wrap gap-2 mt-2">
+                    @foreach($tags as $tag)
+                        <label class="flex items-center space-x-2">
+                            <input type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                            <span>{{ $tag->name }}</span>
+                        </label>
+                    @endforeach
+                </div>
+                
+
 
                 <div class="text-right">
                     <button type="submit"

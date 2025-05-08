@@ -76,6 +76,20 @@
                     <input type="url" name="website" value="{{ old('website', $profile->website) }}"
                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-accent">
                 </div>
+                <!-- Tags Field -->
+                <div>
+                    <label class="block font-medium text-gray-700 mb-1">Your Skills / Tags</label>
+                    <div class="flex flex-wrap gap-3">
+                        @foreach($tags as $tag)
+                            <label class="flex items-center gap-2">
+                                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                                    {{ in_array($tag->id, $selectedTagIds) ? 'checked' : '' }}>
+                                <span class="text-sm">{{ $tag->name }}</span>
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
 
                 <div class="text-right">
                     <button type="submit"
