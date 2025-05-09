@@ -35,5 +35,26 @@ A modern, full-featured web application built with **Laravel** and **Tailwind CS
 - **Authorization**: Role-based middleware
 
 ---
+## 🧰 Setup Instructions
 
+```bash
+# Clone the repository
+git clone https://github.com/antishman/arsijobportal.git
+cd arsi-job-portal
+
+# Install PHP dependencies
+composer install
+
+# Configure .env file
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations and seed default tags
+php artisan migrate --seed
+
+# Start development server
+php artisan serve
+```
+
+---
 ---
