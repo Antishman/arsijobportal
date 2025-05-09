@@ -52,12 +52,22 @@
                 Search
             </button>
         </form>
-        <form method="GET" action="/jobs" class="mb-4">
-            <button type="submit" name="all" value="1"
-                class="bg-primary text-white px-4 py-2 rounded-lg shadow hover:bg-blue-900 transition w-full sm:w-auto">
-                🔍 View All Jobs
-            </button>
-        </form>
+        <div class="mb-4 flex gap-3">
+            <form method="GET" action="/jobs">
+                <button type="submit" name="all" value="1"
+                    class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+                    View All Jobs
+                </button>
+            </form>
+        
+            <form method="GET" action="/jobs">
+                <button type="submit"
+                    class="bg-accent text-white px-4 py-2 rounded hover:bg-orange-700 transition">
+                    View Matching Jobs
+                </button>
+            </form>
+        </div>
+        
         
         
         
