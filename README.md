@@ -111,3 +111,10 @@ php artisan serve
 
 ---
 ---
+
+## 🙌 Credits
+
+Developed by **CS students** for **Arsi University** using modern Laravel and Tailwind development practices.
+
+---
+
