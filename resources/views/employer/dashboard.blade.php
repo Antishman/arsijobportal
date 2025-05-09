@@ -33,7 +33,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-grow py-10 px-4">
+    <main class="flex-grow py-10 px-4">  
         <h2 class="text-2xl font-bold text-primary mb-6">📊 Dashboard Analytics</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
@@ -57,8 +57,13 @@
                     @endforelse
                 </ul>
             </div>
+            <div>
+                <a href="/employer/jobseekers" class="bg-accent text-white px-4 py-2 m-4 mt-6 rounded-lg hover:bg-blue-800 transition">
+                    👥 View Jobseekers
+                </a>
+                </div>
         </div>
-        
+ 
         <div class="max-w-6xl mx-auto space-y-10">
 
             <!-- Title + Action -->

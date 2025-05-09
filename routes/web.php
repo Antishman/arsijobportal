@@ -88,3 +88,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin/tags')->name('admin.tags.')-
     Route::put('/{tag}', [TagController::class, 'update'])->name('update');
     Route::delete('/{tag}', [TagController::class, 'destroy'])->name('destroy');
 });
+
+Route::get('/employer/jobseekers', [JobController::class, 'viewJobseekers'])
+    ->middleware(['auth', 'employer']);

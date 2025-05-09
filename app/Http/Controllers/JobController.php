@@ -235,4 +235,14 @@ public function index(Request $request)
         'topTags'
     ));
 }
+
+public function viewJobseekers()
+{
+    $jobseekers = \App\Models\User::where('role', 'jobseeker')
+        ->with('profile',  'tags')
+        ->get();
+
+    return view('employer.jobseekers.index', compact('jobseekers'));
+}
+
 }
