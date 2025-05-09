@@ -86,4 +86,28 @@ php artisan serve
 - **Acceptance Testing**: Stakeholder validation
 
 ---
+
+## 📚 Folder Structure
+
+```
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── JobController.php
+│   │   │   ├── ApplicationController.php
+│   │   │   ├── ResumeController.php
+│   │   │   ├── ProfileController.php
+│   │   │   └── AdminController.php
+├── database/
+│   ├── migrations/
+│   └── seeders/TagSeeder.php
+├── resources/
+│   └── views/
+│       ├── jobseeker/
+│       ├── employer/
+│       ├── admin/
+├── routes/web.php
+```
+
+---
 ---
