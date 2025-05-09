@@ -77,4 +77,13 @@ php artisan serve
 - **Icons**: Emojis + Heroicons
 
 ---
+
+## ✅ Testing Overview
+
+- **Unit Testing**: Form validation, access controls
+- **Integration Testing**: Application flow, middleware checks
+- **System Testing**: Full scenario testing (post jobs, apply, update profile)
+- **Acceptance Testing**: Stakeholder validation
+
+---
 ---
