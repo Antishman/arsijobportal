@@ -118,3 +118,8 @@ Developed by **CS students** for **Arsi University** using modern Laravel and Ta
 
 ---
 
+## 📬 Contact
+
+GitHub: [github.com/antishman/arsijobportal](https://github.com/antishman/arsijobportal)
+
+
