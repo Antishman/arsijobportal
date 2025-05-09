@@ -25,4 +25,15 @@ A modern, full-featured web application built with **Laravel** and **Tailwind CS
 - **Job Management**: Approve, reject, or delete jobs.
 - **Announcements**: Post event/resource announcements to jobseekers.
 
+## 🧱 Technical Stack
+
+- **Laravel 10**
+- **Tailwind CSS** (via Play CDN)
+- **Blade Templates**
+- **MySQL**
+- **Authentication**: Laravel built-in (web guard)
+- **Authorization**: Role-based middleware
+
+---
+
 ---
