@@ -67,4 +67,14 @@ php artisan serve
 - `Bookmark` tracks jobseeker saved jobs
 
 ---
+
+## 🎨 Design System
+
+- **Primary**: `#002f66`
+- **Accent**: `#FF6600`
+- **Font**: [Inter](https://fonts.google.com/specimen/Inter)
+- **Layout**: Responsive, grid-based dashboards
+- **Icons**: Emojis + Heroicons
+
+---
 ---
