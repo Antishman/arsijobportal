@@ -58,6 +58,32 @@ php artisan serve
 
 ---
 
+# 📦 Database Architecture & Security – Arsi University Job Portal
+
+This document outlines the database structure, normalization, security features, and backup strategies used in the **Arsi University Job Portal** built with Laravel.
+
+---
+
+## 🔐 Database Design & Security Principles
+
+The platform is backed by a robust relational database using Laravel's Eloquent ORM.
+
+---
+
+### 🗃️ Database Relationships
+
+| Relationship Type  | Models Involved                       | Description |
+|--------------------|----------------------------------------|-------------|
+| **One-to-Many**    | `User → Job`                           | Each employer can post multiple jobs. |
+| **One-to-Many**    | `Job → Application`                    | Each job receives multiple applications. |
+| **One-to-One**     | `User → Profile`                       | Each user has a unique extended profile. |
+| **Many-to-Many**   | `User ↔ Tag`, `Job ↔ Tag`              | Users and jobs can be associated with multiple tags. |
+| **One-to-Many**    | `User → Bookmark`, `Job → Bookmark`    | Users can bookmark multiple jobs. |
+| **One-to-Many**    | `User (admin) → Announcement`          | Admins can post multiple announcements. |
+
+Implemented using Eloquent methods (`hasMany`, `belongsTo`, `belongsToMany`, etc.) and enforced via migrations.
+
+---
 
 
 
