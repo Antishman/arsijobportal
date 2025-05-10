@@ -137,6 +137,17 @@ php artisan migrate:fresh --seed
 ```
 
 ---
+
+### 🧱 Other Enhancements
+
+| Feature                        | Description |
+|-------------------------------|-------------|
+| Mass Assignment Protection     | Models use `$fillable` |
+| PreventBackHistory Middleware | Disables back after logout |
+| HTTPS Ready                    | Secure deployment |
+| Error Logging                  | Laravel log files in `storage/logs/` |
+
+---
 ## 🎨 Design System
 
 - **Primary**: `#002f66`
