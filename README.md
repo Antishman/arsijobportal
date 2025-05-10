@@ -109,7 +109,34 @@ Implemented using Eloquent methods (`hasMany`, `belongsTo`, `belongsToMany`, etc
 - Back-navigation restricted via `PreventBackHistory` middleware
 
 ---
+### 📐 Normalization
 
+1. **1NF** – Atomic fields
+2. **2NF** – No partial dependencies
+3. **3NF** – No transitive dependencies
+
+Efficient schema with separate tables and foreign keys.
+
+---
+
+### 💾 Backup & Recovery
+
+**Backup Command:**
+```bash
+mysqldump -u root -p arsijobportal > arsijobportal_backup.sql
+```
+
+**Restore Command:**
+```bash
+mysql -u root -p arsijobportal < arsijobportal_backup.sql
+```
+
+**Laravel Reset & Seed:**
+```bash
+php artisan migrate:fresh --seed
+```
+
+---
 ## 🎨 Design System
 
 - **Primary**: `#002f66`
