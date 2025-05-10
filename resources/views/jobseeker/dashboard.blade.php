@@ -30,6 +30,7 @@
         };
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="//unpkg.com/alpinejs" defer></script>
     <style>body { font-family: 'Inter', sans-serif; }</style>
 </head>
 <body class="bg-gray-100 text-gray-800 flex flex-col min-h-screen">
@@ -120,6 +121,27 @@
         </div>
     </section>
 @endif
+        @if(session('show_profile_popup'))
+            <div x-data="{ show: true }" x-show="show" class="fixed inset-0 z-50 flex items-center justify-center">
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+
+                <!-- Modal -->
+                <div class="relative bg-white border border-gray-200 rounded-xl shadow-lg p-6 w-full max-w-md mx-auto text-center z-50">
+                    <h2 class="text-xl font-bold text-primary mb-3">🎉 Welcome!</h2>
+                    <p class="text-gray-700 mb-4">
+                        Please create your profile to get personalized job matches and improve your visibility.
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <a href="{{ route('jobseeker.profile.edit') }}"
+                        class="bg-accent text-white px-4 py-2 rounded hover:bg-orange-600 transition">
+                            Create Profile
+                        </a>
+                        <button @click="show = false" class="text-gray-600 hover:underline text-sm">Skip</button>
+                    </div>
+                </div>
+            </div>
+        @endif
 
             <!-- Announcements -->
             @if($announcements->count())
