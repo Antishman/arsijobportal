@@ -59,14 +59,7 @@ php artisan serve
 ---
 
 
-## 🧾 Database Relationships
 
-- `User` hasOne `Resume`, hasMany `Applications`, belongsToMany `Tags`
-- `Job` belongsTo `User` (employer), hasMany `Applications`, belongsToMany `Tags`
-- `Application` belongsTo `User`, belongsTo `Job`
-- `Bookmark` tracks jobseeker saved jobs
-
----
 
 ## 🎨 Design System
 
