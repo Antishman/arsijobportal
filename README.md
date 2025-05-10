@@ -86,6 +86,29 @@ Implemented using Eloquent methods (`hasMany`, `belongsTo`, `belongsToMany`, etc
 ---
 
 
+### 🔒 Security Features
+
+#### ✅ Authentication & Roles
+- Laravel session-based login
+- Role-based access via middleware
+
+#### ✅ CSRF Protection
+- `@csrf` on all forms
+
+#### ✅ SQL Injection Prevention
+- ORM-based queries
+
+#### ✅ Input Validation
+- Laravel form validation
+
+#### ✅ Password Hashing
+- Secure bcrypt via `Hash::make()`
+
+#### ✅ Session Expiry & Logout
+- Session destroyed after logout
+- Back-navigation restricted via `PreventBackHistory` middleware
+
+---
 
 ## 🎨 Design System
 
